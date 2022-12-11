@@ -6,10 +6,12 @@ import com.hacatac.security.client.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
 @Slf4j
+@Component
 public class RegistrationCompleteEventListener implements
         ApplicationListener<RegistrationCompleteEvent> {
     @Autowired
@@ -22,7 +24,7 @@ public class RegistrationCompleteEventListener implements
          userService.saveVerificationTokenForUser(token, user);
         //When created, we can Send Mail to user
         String url =
-                event.getApplicationurl()
+                event.getApplicationUrl()
                         + "verifyRegistration?token="
                         + token;
         //sendVerificationEmail <---- will need to create method to send the email for now we're just mockign it with log

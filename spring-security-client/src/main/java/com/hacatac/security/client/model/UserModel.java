@@ -15,8 +15,8 @@ public class UserModel {
     private String password;
     private String matchingPassword;
 
-    public boolean isMatchingPassword() {
-        return this.password.equals(this.matchingPassword);
-    }
+//    public boolean isMatchingPassword() {
+//        return this.password.equals(this.matchingPassword);
+//    }
 
 }
