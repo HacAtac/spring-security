@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 @Slf4j
-@Component
+@Component //when we use @Component, it essentillly makes it a bean
 public class RegistrationCompleteEventListener implements
         ApplicationListener<RegistrationCompleteEvent> {
     @Autowired
@@ -25,7 +25,7 @@ public class RegistrationCompleteEventListener implements
         //When created, we can Send Mail to user
         String url =
                 event.getApplicationUrl()
-                        + "verifyRegistration?token="
+                        + "/verifyRegistration?token="
                         + token;
         //sendVerificationEmail <---- will need to create method to send the email for now we're just mockign it with log
         log.info("Click the link to verify your account: {}",

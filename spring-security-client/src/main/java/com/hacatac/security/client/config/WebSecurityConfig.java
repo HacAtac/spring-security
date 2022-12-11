@@ -13,7 +13,9 @@ public class WebSecurityConfig {
 
     private static final String[] WHITE_LIST_URLS = {
             "/welcome",
-            "/register"
+            "/register",
+            "/verifyRegistration*",
+            "/resendVerifyToken*"
     };
 
     @Bean //we define this as a bean because it's not automatically created by spring as a bean(not a component but a configuration)
