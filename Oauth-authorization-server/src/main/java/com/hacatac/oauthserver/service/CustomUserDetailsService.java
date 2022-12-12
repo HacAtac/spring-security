@@ -21,6 +21,7 @@ import java.util.List;
 @Service
 @Transactional
 public class CustomUserDetailsService implements UserDetailsService {
+
     @Autowired
     private UserRepository userRepository;
 
@@ -31,10 +32,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-
         User user = userRepository.findByEmail(email);
-        if(user == null){
-            throw new UsernameNotFoundException("User not found");
+        if(user == null) {
+            throw  new UsernameNotFoundException("No User Found");
         }
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),
@@ -46,11 +46,12 @@ public class CustomUserDetailsService implements UserDetailsService {
                 getAuthorities(List.of(user.getRole()))
         );
     }
-   private Collection<? extends GrantedAuthority> getAuthorities(List<String> roles){
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        for(String role : roles) {
+
+    private Collection<? extends GrantedAuthority> getAuthorities(List<String> roles) {
+        List<GrantedAuthority>  authorities = new ArrayList<>();
+        for(String role: roles) {
             authorities.add(new SimpleGrantedAuthority(role));
         }
         return authorities;
-   }
+    }
 }

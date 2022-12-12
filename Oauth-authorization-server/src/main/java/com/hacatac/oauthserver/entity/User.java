@@ -1,19 +1,11 @@
 package com.hacatac.oauthserver.entity;
 
-
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class User {
 
     @Id
@@ -26,8 +18,6 @@ public class User {
     @Column(length = 60)
     private String password;
 
-
     private String role;
     private boolean enabled = false;
-
 }

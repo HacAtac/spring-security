@@ -1,6 +1,5 @@
 package com.hacatac.oauthserver.service;
 
-import net.bytebuddy.utility.nullability.AlwaysNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -20,24 +19,22 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
-
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
-        UserDetails user = customUserDetailsService.loadUserByUsername(username);
-        return checkPassword(user, password);
+        UserDetails user= customUserDetailsService.loadUserByUsername(username);
+        return checkPassword(user,password);
     }
 
     private Authentication checkPassword(UserDetails user, String rawPassword) {
-        if (passwordEncoder.matches(rawPassword, user.getPassword())) {
-            return new UsernamePasswordAuthenticationToken(
-                    user.getUsername(),
+        if(passwordEncoder.matches(rawPassword, user.getPassword())) {
+            return new UsernamePasswordAuthenticationToken(user.getUsername(),
                     user.getPassword(),
                     user.getAuthorities());
-        } else {
-            throw new BadCredentialsException("Bad credentials");
+        }
+        else {
+            throw new BadCredentialsException("Bad Credentials");
         }
     }
 
